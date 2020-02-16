@@ -37,7 +37,7 @@ class ControladorAcceso
 
         $bd = ControladorBD::getControlador();
         $bd->abrirBD();
-        $consulta = "SELECT * FROM administradores WHERE email=:email and password=:password";
+        $consulta = "SELECT * FROM usuarios WHERE email=:email and password=:password";
         $parametros = array(':email' => $email, ':password' => $password);
         $res = $bd->consultarBD($consulta, $parametros);
         $filas = $res->fetchAll(PDO::FETCH_OBJ);

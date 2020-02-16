@@ -93,7 +93,7 @@ class ControladorLuchador {
         $filas=$res->fetchAll(PDO::FETCH_OBJ);
         if (count($filas) > 0) {
             foreach ($filas as $a) {
-                $dragon = new luchador($a->id, $a->nombre, $a->raza, $a->ki, $a->transformacion, $a->ataque, $a->planeta, $a->password, $a->fecha, $a->imagen);
+                $luchador = new luchador($a->id, $a->nombre, $a->raza, $a->ki, $a->transformacion, $a->ataque, $a->planeta, $a->password, $a->fecha, $a->imagen);
             }
             $bd->cerrarBD();
             return $luchador;

@@ -164,7 +164,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
     } else {
         alerta("Hay errores al procesar el formulario revise los errores");
     }
-  
 
 }
 ?>
@@ -227,7 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
                 </div>
             </div>
   </div>
-
 <div class="list-group">
     <a class="list-group-item active"> 
     <h2 class="list-group-item-heading">Formulario </h2>
@@ -243,7 +241,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["aceptar"]) {
 
 <div class="lead">
 <!-- Formulario-->
-
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
     <!-- Nombre-->
     <div class="form-group <?php echo (!empty($Errnombre)) ? 'error: ' : ''; ?>">

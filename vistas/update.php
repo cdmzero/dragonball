@@ -19,6 +19,8 @@ $Valnombre = $Valraza = $Valki = $Valtransformacion = $Valataque = $Valplaneta =
 $Errnombre = $Errraza = $Errki = $Errtransformacion = $Errataque = $Errplaneta = $Errpassword = $Errfecha =  $Errimagen = "";
 $errores = [];
 $Infoimagen= "";
+$imagenAnterior= "";
+
 
 
 if (isset($_POST["id"]) && !empty($_POST["id"])) {
@@ -36,6 +38,24 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
       $nombre = $Valnombre;
   }
   
+  $nombreAnterior = $_POST['nombreAnterior'];
+
+   $controlador = ControladorLuchador::getControlador();
+   $luchador = $controlador->buscarLuchador($nombre);
+
+   if (isset($luchador) && $nombreAnterior != $nombre) {
+
+    $Errnombre = "El nombre elegido esta cogido, debes seleccionar otro";
+    $errores[] = $Errnombre;
+
+    } elseif($nombreAnterior == $nombre){
+        $nombre = $nombreAnterior;
+    }elseif(empty($luchador) && $nombreAnterior != $nombre){
+        $nombre = $Valnombre;
+    }
+
+
+
     //raza
     $Valraza = filtrado($_POST["raza"]);
     if (empty($Valraza)) {
@@ -91,14 +111,14 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     $passwordAnterior = decode($_POST['passwordAnterior']);
     $Valpassword = $_POST["password"];
  
-    if($Valpassword != "*****"){
+    if($Valpassword != "*****" && $Valpassword != $passwordAnterior  ){
                      if(empty($Valpassword) || strlen($Valpassword)<5){
                          $Errpassword = "Por favor introduzca password válido y que sea mayor que 5 caracteres.";
                          $errores[]= $Errpassword;
                      } else{
                          $password= hash('md5',$Valpassword);
                      }
-     }else{
+     }elseif($Valpassword == "*****" || $Valpassword == $passwordAnterior){
      $password = $passwordAnterior;
     }
 
@@ -160,18 +180,14 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
         $imagen = trim($_POST["imagenAnterior"]);
     }
 
-    if (
-        empty($errores)) {
-
-        $controlador = ControladorDragon::getControlador();
+    if (empty($errores)){
+        $controlador = ControladorLuchador::getControlador();
         $estado = $controlador->actualizarLuchador($id, $nombre, $raza, $ki, $transformacion, $ataque, $planeta, $password, $fecha, $imagen);
         if ($estado) {
-            alerta("Se ha creado correctamente. $Infoimagen");
-            header("location: ../index.php");
+            alerta("Se ha creado correctamente. $Infoimagen","../index.php");
             exit();
         } else {
             alerta("Ha fallado la modificacion");
-            header("location: error.php");
             exit();
         }
     } else {
@@ -179,12 +195,15 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
     }
 }
 
+
+
 if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     $id =  decode($_GET["id"]);
     $controlador = ControladorLuchador::getControlador();
     $luchador = $controlador->buscarLuchadorid($id);
     if (!is_null($luchador)) {
         $nombre = $luchador->getnombre();
+        $nombreAnterior = $nombre;
         $raza = $luchador->getraza();
         $ki = $luchador->getki();
         $transformacion = $luchador->gettransformacion();
@@ -265,6 +284,8 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             </div>
   </div>
 
+
+
 <div class="list-group">
     <a class="list-group-item active"> 
     <h2 class="list-group-item-heading">Formulario de Modificacion </h2>
@@ -284,10 +305,10 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         <tr>
             <td class="col-xs-11" class="align-left">
                 <!-- Nombre-->
-                <div <?php echo (!empty($nombreErr)) ? 'error: ' : ''; ?> >
+                <div <?php echo (!empty($Errnombre)) ? 'error: ' : ''; ?> >
                     <label>Nombre</label>
-                    <input type="text" name="nombre" value="<?php echo $nombre; ?>">
-                    <?php echo $nombreErr; ?>
+                    <input type="text" name="nombre" value="<?php echo $nombreAnterior; ?>">
+                    <?php echo $Errnombre; ?>
                 </div>
             </td>
             <!-- Fotografía -->
@@ -342,7 +363,7 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
     <!-- Password -->
     <div <?php echo (!empty($Errpassword)) ? 'error: ' : ''; ?>">
         <label>Password</label>
-        <input type="password" required name="password" value="*****" readonly>
+        <input type="password" required name="password" value="*****" >
         <?php echo $Errpasssword; ?>
     </div>
     <!-- Fecha-->
@@ -359,8 +380,9 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
             <?php echo $Errimagen; ?>
         </div>
         <input type="hidden" name="id" value="<?php echo $id; ?>" />
-        <input type="hidden" name="passwordAnterior" value="<?php echo decode($passwordAnterior); ?>" />
+        <input type="hidden" name="passwordAnterior" value="<?php echo encode($passwordAnterior); ?>" />
         <input type="hidden" name="imagenAnterior" value="<?php echo $imagenAnterior; ?>" />
+        <input type="hidden" name="nombreAnterior" value="<?php echo $nombreAnterior; ?>" />
         </div>
         </div> 
             </div>

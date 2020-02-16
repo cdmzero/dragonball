@@ -38,7 +38,15 @@ error_reporting(E_ALL ^ E_NOTICE);
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
+<!DOCTYPE html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PDO-DB</title>
+  <link rel="icon" type="image/png" href="/imagenes/mifavicon.png"/>
+
 <style type="text/css">
 .navbar{margin-bottom:0;}
 section{width:100%; float:left;}
@@ -50,8 +58,7 @@ section{width:100%; float:left;}
 .footer-link{float:left; width:100%; background:#222222; text-align:center; padding:30px;}
 .footer-link a{color:#A9FD00; font-size:18px; text-transform:uppercase;}
 </style>
-</head>
-
+<link rel="shortcut icon" type="image/x-icon" href="/dragonball/imagenes/mifavicon.ico" />
  <!-- Static navbar -->
  <nav class="navbar navbar-inverse  navbar-static-top">
   <div class="container-fluid">

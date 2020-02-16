@@ -3,14 +3,8 @@ error_reporting(E_ALL & ~(E_STRICT|E_NOTICE));
 session_start();
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-<head>
+
 <style type="text/css">
 .banner-section{background-image:url("imagenes/admin.jpg"); background-size:1500px 500px ; height: 380px; left: 0; position: absolute; top: 0; background-position:0; background-repeat: no-repeat; }
 #cabecera {
@@ -48,6 +42,7 @@ session_start();
                0 5px 5px rgba(0,0,0,.2),
                0 10px 10px rgba(0,0,0,.1);
   color: #FFF;}
+
 </style>
 </head>
 <body>
@@ -55,7 +50,7 @@ session_start();
 
 <section class="post-content-section">
     <div class="container">
-        <div class="row" >
+        <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
             <div id='cabecera'> <h1 class="display-1 text-center">Lista de Luchadores</h1></div>
             <div id="menu">    

@@ -110,7 +110,6 @@ if (isset($_POST["id"]) && !empty($_POST["id"])) {
                 <div class="col-md-12">
                 <br>
 <br>
-
                 <div class="lead">
                 <div class="well">
                 
