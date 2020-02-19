@@ -11,6 +11,9 @@ if (isset($_GET["id"]) && !empty(trim($_GET["id"]))) {
         header("location: error.php");
         exit();
     }
+}else{
+    header("location: error.php");
+    exit();
 }
 ?>
 

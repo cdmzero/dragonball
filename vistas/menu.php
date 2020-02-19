@@ -72,7 +72,7 @@ session_start();
   <a href="utilidades/descargar.php?opcion=XML" target="_blank"class="btn btn-primary">XML</a>
   <a href="utilidades/descargar.php?opcion=JSON" target="_blank"class="btn btn-primary">JSON</a>
   <?php if(isset($_SESSION['email']) && strstr($_SESSION['email'],'@admin.com')){ ?>
-  <a href="vistas/create.php" class="btn btn-success"> Añadir dragon/a</a>
+  <a href="vistas/create.php" class="btn btn-success"> Añadir Luchador/a</a>
   <?php }?>
 </div>
 <?php }?>
